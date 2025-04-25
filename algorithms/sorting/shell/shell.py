@@ -7,6 +7,7 @@ def shell_sort(array):
                 array[j], array[j + h] = array[j + h], array[j]
                 j -= h
         h //= 2
+        
     return array
 
 # testing
