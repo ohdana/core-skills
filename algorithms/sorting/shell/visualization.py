@@ -29,15 +29,17 @@ class Main:
     
     def visualize(self):
         self.draw_bars()
-        h = len(self.numbers) // 2
-        while h > 0:
-            for i in range(h, len(self.numbers), h):
-                j = i - h
-                while j >= 0 and self.numbers[j] > self.numbers[j + h]:
-                    self.numbers[j], self.numbers[j + h] = self.numbers[j + h], self.numbers[j]
-                    j -= h
+        n = len(self.numbers)
+        h = 1
+        while h < n // 3: h = 3 * h + 1
+        while h >= 1:
+            for i in range(h, n):
+                j = i
+                while j >= h and self.numbers[j] < self.numbers[j - h]:
+                    self.numbers[j], self.numbers[j - h] = self.numbers[j - h], self.numbers[j]
                     self.draw_bars()
-            h //= 2
+                    j -= h
+            h //= 3
     
     def draw_bars(self):
         self.display_surface.fill('black')

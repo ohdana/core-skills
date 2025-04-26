@@ -1,12 +1,14 @@
 def shell_sort(array):
-    h = len(array) // 2
-    while h > 0:
-        for i in range(h, len(array), h):
-            j = i - h
-            while j >= 0 and array[j] > array[j + h]:
-                array[j], array[j + h] = array[j + h], array[j]
+    n = len(array)
+    h = 1
+    while h < n // 3: h = 3 * h + 1
+    while h >= 1:
+        for i in range(h, n):
+            j = i
+            while j >= h and array[j] < array[j - h]:
+                array[j], array[j - h] = array[j - h], array[j]
                 j -= h
-        h //= 2
+        h //= 3
         
     return array
 
