@@ -11,7 +11,7 @@ class Main:
     def __init__(self):
         pygame.init()
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-        pygame.display.set_caption('Insertion Sort')
+        pygame.display.set_caption('Bubble Sort')
         self.clock = pygame.time.Clock()
         self.generate_numbers()
         self.is_running = True
