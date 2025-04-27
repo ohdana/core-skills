@@ -5,6 +5,7 @@ from bubble.bubble import bubble_sort
 from selection.selection import selection_sort
 from insertion.insertion import insertion_sort
 from shell.shell import shell_sort
+from merge.merge import merge_sort
 
 def get_random_numbers(n):
     return [randint(0, n) for i in range(n)]
@@ -14,6 +15,7 @@ sorts = {
     'Selection sort': selection_sort,
     'Insertion sort': insertion_sort,
     'Shell sort (Sedgewick)': shell_sort,
+    'Merge sort': merge_sort
     }
 
 for i in [500, 1000, 5000, 10000, 15000]:
