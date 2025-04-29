@@ -13,24 +13,15 @@ def sort(array, left, right):
     sort(array, j + 1, right)
 
 def partititon(array, left, right):
-    i = left + 1
-    j = right
-    partitioning_item = array[left]
-    while True:
-        while array[i] < partitioning_item:
-            if i == right: break
+    partition_item = array[right]
+    i = left - 1
+    for j in range(left, right):
+        if array[j] <= partition_item:
             i += 1
-        while partitioning_item < array[j]:
-            if j == left: break
-            j -= 1
-            
-        if i >= j: break
-        array[i], array[j] = array[j], array[i]
-        
-    array[left], array[j] = array[j], array[left]
+            array[i], array[j] = array[j], array[i]
+    array[i + 1], array[right] = array[right], array[i + 1]
     
-    return j
-            
+    return i + 1
 
 # testing
 
