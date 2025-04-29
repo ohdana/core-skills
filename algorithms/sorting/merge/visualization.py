@@ -15,6 +15,7 @@ class Main:
         self.clock = pygame.time.Clock()
         self.generate_numbers()
         self.is_running = True
+        self.is_sorted = False
     
     def run(self):
         while self.is_running:
@@ -29,34 +30,36 @@ class Main:
     
     def visualize(self):
         self.draw_bars()
-        self.sort(self.numbers, 0, len(self.numbers) - 1)
+        if not self.is_sorted:
+            self.sort(self.numbers, 0, len(self.numbers) - 1)
+            self.is_sorted = True
 
-    def sort(self, array, lo, hi):
-        if hi <= lo: return
-        mid = lo + (hi - lo) // 2
-        self.sort(array, lo, mid)
-        self.sort(array, mid + 1, hi)
-        self.merge(array, lo, mid, hi)
+    def sort(self, array, left, right):
+        if right <= left:
+            return
+        mid = left + (right - left) // 2
+        self.sort(array, left, mid)
+        self.sort(array, mid + 1, right)
+        self.merge(array, left, mid, right)
 
-    def merge(self, array, lo, mid, hi):
-        i = lo
+    def merge(self, array, left, mid, right):
+        i = left
         j = mid + 1
 
-        aux = array[:]
-
-        for k in range(lo, hi + 1):
-            if i > mid: 
-                array[k] = aux[j]
+        array_copy = array[:]
+        for k in range(left, right + 1):
+            if i > mid:
+                array[k] = array_copy[j]
                 j += 1
-            elif j > hi:
-                array[k] = aux[i]
+            elif j > right:
+                array[k] = array_copy[i]
                 i += 1
-            elif aux[j] < aux[i]:
-                array[k] = aux[j]
-                j += 1
+            elif array_copy[i] < array_copy[j]:
+                array[k] = array_copy[i]
+                i += 1
             else:
-                array[k] = aux[i]
-                i += 1
+                array[k] = array_copy[j]
+                j += 1
             self.draw_bars()
     
     def draw_bars(self):

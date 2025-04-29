@@ -3,32 +3,31 @@ def merge_sort(array):
     
     return array
 
-def sort(array, lo, hi):
-    if hi <= lo: return
-    mid = lo + (hi - lo) // 2
-    sort(array, lo, mid)
-    sort(array, mid + 1, hi)
-    merge(array, lo, mid, hi)
+def sort(array, left, right):
+    if right <= left: return
+    mid = left + (right - left) // 2
+    sort(array, left, mid)
+    sort(array, mid + 1, right)
+    merge(array, left, mid, right)
 
-def merge(array, lo, mid, hi):
-    i = lo
+def merge(array, left, mid, right):
+    i = left
     j = mid + 1
     
-    aux = array[:]
-    
-    for k in range(lo, hi + 1):
-        if i > mid: 
-            array[k] = aux[j]
+    array_copy = array[:]
+    for k in range(left, right + 1):
+        if i > mid:
+            array[k] = array_copy[j]
             j += 1
-        elif j > hi:
-            array[k] = aux[i]
+        elif j > right:
+            array[k] = array_copy[i]
             i += 1
-        elif aux[j] < aux[i]:
-            array[k] = aux[j]
-            j += 1
+        elif array_copy[i] < array_copy[j]:
+            array[k] = array_copy[i]
+            i += 1
         else:
-            array[k] = aux[i]
-            i += 1
+            array[k] = array_copy[j]
+            j += 1
 
 # testing
 
